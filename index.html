@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fariz Danish — Computer Science (AI) Student</title>
+<meta name="description" content="Portfolio of Fariz Danish Bin Fadli — Computer Science (AI) student specializing in machine learning, data analytics, and web development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#2451E0;
+    --blue-light:#EAF0FE;
+    --navy:#101828;
+    --text-secondary:#5B6472;
+    --text-muted:#8A93A3;
+    --bg:#F6F7F9;
+    --white:#FFFFFF;
+    --border:#E4E7EC;
+    --red:#D8483C;
+    --green:#1EA672;
+    --radius:12px;
+    --radius-sm:8px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', -apple-system, sans-serif;
+    background:var(--bg);
+    color:var(--navy);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  section{scroll-margin-top:72px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:var(--maxw); margin:0 auto; padding:14px 24px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px;}
+  .brand .logo{
+    width:32px; height:32px; border-radius:9px; background:var(--blue);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700; letter-spacing:0.5px;
+  }
+  .nav-links{display:flex; gap:28px; font-size:14px; color:var(--text-secondary); font-weight:500;}
+  .nav-links a{transition:color .15s;}
+  .nav-links a:hover, .nav-links a.active{color:var(--blue);}
+  .nav-cta{
+    background:var(--blue); color:#fff; border:none; padding:10px 18px;
+    border-radius:8px; font-size:14px; font-weight:500; cursor:pointer;
+    transition:background .15s;
+  }
+  .nav-cta:hover{background:#1c40b8;}
+  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:4px;}
+  .menu-toggle span{display:block; width:22px; height:2px; background:var(--navy); margin:5px 0; border-radius:2px;}
+
+  /* HERO */
+  .hero{padding:64px 0 56px;}
+  .hero-grid{display:grid; grid-template-columns:1.3fr 0.9fr; gap:40px; align-items:start;}
+  .badge{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500;
+    background:var(--blue-light); color:var(--blue); padding:7px 14px; border-radius:20px;
+    margin-bottom:22px;
+  }
+  .badge::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--green);}
+  h1{font-size:44px; font-weight:700; line-height:1.15; letter-spacing:-0.02em; margin-bottom:18px;}
+  h1 .accent{color:var(--blue);}
+  .hero p.lede{font-size:16px; color:var(--text-secondary); max-width:460px; margin-bottom:26px;}
+  .btn-row{display:flex; gap:12px; margin-bottom:22px; flex-wrap:wrap;}
+  .btn{
+    padding:12px 22px; border-radius:9px; font-size:14.5px; font-weight:500;
+    cursor:pointer; transition:all .15s; display:inline-flex; align-items:center; gap:6px;
+  }
+  .btn-primary{background:var(--blue); color:#fff; border:none;}
+  .btn-primary:hover{background:#1c40b8;}
+  .btn-secondary{background:#fff; color:var(--navy); border:1px solid var(--border);}
+  .btn-secondary:hover{border-color:#c8ccd3;}
+  .hero-meta{font-size:12.5px; color:var(--text-muted);}
+
+  .side-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:14px;}
+  .profile-row{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
+  .avatar{width:46px; height:46px; border-radius:50%; background:var(--red); flex-shrink:0;
+    background-image:linear-gradient(160deg,#e5584a,#c53c30); }
+  .profile-name{font-size:14.5px; font-weight:600;}
+  .profile-role{font-size:12.5px; color:var(--text-secondary);}
+  .status{font-size:11.5px; color:var(--green); font-weight:500; margin-top:2px;}
+  .stat-row{display:flex; gap:8px;}
+  .stat-box{flex:1; background:var(--bg); border-radius:8px; padding:10px 6px; text-align:center;}
+  .stat-box .num{font-size:16px; font-weight:700; color:var(--blue);}
+  .stat-box .label{font-size:9.5px; color:var(--text-muted); margin-top:2px;}
+  .eyebrow{font-size:9.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:10px; font-weight:600;}
+  .prev-row{display:flex; justify-content:space-between; font-size:13px; margin-bottom:2px;}
+  .prev-row .company{font-weight:600;}
+  .prev-row .year{color:var(--text-muted);}
+  .prev-sub{font-size:12px; color:var(--text-muted);}
+
+  /* SECTION HEADERS */
+  .section-head{margin-bottom:32px;}
+  .section-head .eyebrow{color:var(--blue);}
+  h2{font-size:28px; font-weight:700; letter-spacing:-0.01em;}
+  .section-sub{color:var(--text-secondary); font-size:14.5px; margin-top:8px; max-width:480px;}
+
+  section.block{padding:56px 0;}
+  section.block.alt{background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+
+  /* PROJECTS */
+  .featured-project{
+    background:var(--navy); border-radius:var(--radius); padding:32px; margin-bottom:16px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .tag{
+    display:inline-block; font-size:11.5px; font-weight:500; padding:5px 12px; border-radius:14px;
+    background:rgba(255,255,255,0.1); color:#9CB4FF; width:fit-content;
+  }
+  .tag.light{background:var(--blue-light); color:var(--blue);}
+  .featured-project h3{color:#fff; font-size:21px; font-weight:600; margin-top:4px;}
+  .featured-project p{color:#B4BBC7; font-size:14px; max-width:600px; line-height:1.7;}
+  .tech-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;}
+  .tech-pill{font-size:11.5px; color:#B4BBC7; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'JetBrains Mono',monospace;}
+  .featured-link{color:#9CB4FF; font-size:13.5px; font-weight:500; margin-top:6px; display:inline-flex; align-items:center; gap:4px;}
+
+  .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:6px;}
+  .gallery img{
+    width:100%; height:100px; object-fit:cover; border-radius:8px; cursor:pointer;
+    border:1px solid rgba(255,255,255,0.1); transition:opacity .15s;
+  }
+  .gallery img:hover{opacity:0.82;}
+  .lightbox{
+    display:none; position:fixed; inset:0; background:rgba(10,13,20,0.9); z-index:1000;
+    align-items:center; justify-content:center; padding:32px; cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw; max-height:88vh; border-radius:10px; object-fit:contain;}
+
+  .project-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .project-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; transition:transform .15s, box-shadow .15s;}
+  .project-card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(16,24,40,0.06);}
+  .project-card h4{font-size:14px; font-weight:600; margin:10px 0 6px;}
+  .project-card p{font-size:12.5px; color:var(--text-muted);}
+
+  /* SKILLS */
+  .skill-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:44px;}
+  .skill-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px;}
+  .skill-icon{width:34px; height:34px; border-radius:9px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; margin-bottom:12px; font-size:16px;}
+  .skill-card h4{font-size:14px; font-weight:600; margin-bottom:10px;}
+  .skill-card .skill-list{font-size:12.5px; color:var(--text-secondary); line-height:2;}
+
+  .exp-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; display:grid; grid-template-columns:130px 1fr auto; gap:20px; align-items:start; margin-bottom:12px;}
+  .exp-date{font-size:12px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; padding-top:2px;}
+  .exp-title{font-size:14.5px; font-weight:600;}
+  .exp-company{font-size:13px; color:var(--blue); font-weight:500; margin:2px 0 8px;}
+  .exp-desc{font-size:13px; color:var(--text-secondary); line-height:1.7;}
+  .exp-loc{font-size:12px; color:var(--text-muted); white-space:nowrap;}
+
+  .edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  .edu-card, .cert-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px 18px;}
+  .edu-card h4, .cert-card h4{font-size:14px; font-weight:600; margin-bottom:4px;}
+  .edu-card .school{font-size:12.5px; color:var(--blue); font-weight:500;}
+  .edu-card .dates, .cert-card .sub{font-size:12px; color:var(--text-muted); margin-top:4px;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:start;}
+  .about-photo{
+    width:100%; aspect-ratio:3/4; border-radius:var(--radius); background:var(--red);
+    background-image:linear-gradient(165deg,#e5584a,#b8382c);
+    display:flex; align-items:flex-end; padding:16px; position:relative; overflow:hidden;
+  }
+  .about-photo .caption{color:#fff; position:relative; z-index:1;}
+  .about-photo .caption .name{font-size:14px; font-weight:600;}
+  .about-photo .caption .loc{font-size:11.5px; opacity:0.85;}
+  .about-text p{font-size:14.5px; color:var(--text-secondary); margin-bottom:16px; line-height:1.8;}
+  .about-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:20px;}
+  .about-stat{background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; text-align:center;}
+  .about-stat .num{font-size:19px; font-weight:700; color:var(--blue);}
+  .about-stat .label{font-size:11px; color:var(--text-muted); margin-top:2px;}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:280px 1fr; gap:20px;}
+  .contact-card{
+    background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm);
+    padding:14px 16px; display:flex; align-items:center; gap:12px; margin-bottom:10px;
+    transition:border-color .15s;
+  }
+  .contact-card:hover{border-color:var(--blue);}
+  .contact-icon{width:32px; height:32px; border-radius:8px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;}
+  .contact-card .cl{font-size:11px; color:var(--text-muted);}
+  .contact-card .cv{font-size:13.5px; font-weight:600;}
+  .avail-card{background:var(--blue); border-radius:var(--radius-sm); padding:16px; color:#fff;}
+  .avail-card .title{font-size:13px; font-weight:600; margin-bottom:4px;}
+  .avail-card .desc{font-size:12px; opacity:0.9;}
+
+  .form-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:26px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field label{display:block; font-size:12px; font-weight:500; color:var(--text-secondary); margin-bottom:6px;}
+  .field input, .field textarea{
+    width:100%; border:1px solid var(--border); border-radius:8px; padding:11px 12px;
+    font-size:14px; font-family:inherit; background:var(--bg); color:var(--navy);
+    transition:border-color .15s;
+  }
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--blue); background:#fff;}
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-foot{display:flex; justify-content:space-between; align-items:center; margin-top:4px; flex-wrap:wrap; gap:12px;}
+  .form-note{font-size:12px; color:var(--text-muted);}
+  #formStatus{font-size:13px; margin-top:10px;}
+
+  footer{padding:28px 0; text-align:center; border-top:1px solid var(--border); background:#fff;}
+  footer p{font-size:12.5px; color:var(--text-muted);}
+
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0; background:#fff; flex-direction:column;
+      padding:20px 24px; gap:18px; border-bottom:1px solid var(--border);
+      transform:translateY(-150%); transition:transform .25s ease; z-index:99;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    h1{font-size:32px;}
+    .project-grid{grid-template-columns:repeat(2,1fr);}
+    .skill-grid{grid-template-columns:repeat(2,1fr);}
+    .exp-card{grid-template-columns:1fr; gap:6px;}
+    .edu-grid, .about-stats, .form-row{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{max-width:220px;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#home" class="brand"><span class="logo">FD</span>Fariz Danish</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-nav>Home</a></li>
+      <li><a href="#work" data-nav>Work</a></li>
+      <li><a href="#skills" data-nav>Skills</a></li>
+      <li><a href="#about" data-nav>About</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a href="#contact" class="nav-cta">Get in touch</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">Open to internships and grad roles</span>
+      <h1>Computer Science <span class="accent">(AI)</span> student building data and ML systems</h1>
+      <p class="lede">I build ML pipelines, data systems, and internal tools — from a 90.6% accuracy materials-science classifier to a full clinic management platform. Based in Sepang, Selangor.</p>
+      <div class="btn-row">
+        <a href="#work" class="btn btn-primary">View my work →</a>
+        <a href="#contact" class="btn btn-secondary">Contact me</a>
+      </div>
+      <p class="hero-meta">Sepang, Selangor &nbsp;·&nbsp; Python, SQL, Power BI &nbsp;·&nbsp; CompTIA Data+</p>
+    </div>
+
+    <div>
+      <div class="side-card">
+        <div class="profile-row">
+          <img src="fariz-photo.jpg" alt="Fariz Danish" class="avatar" style="object-fit:cover;">
+          <div>
+            <div class="profile-name">Fariz Danish</div>
+            <div class="profile-role">Computer Science (AI) Student</div>
+            <div class="status">● Open to work</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-box"><div class="num">6</div><div class="label">PROJECTS</div></div>
+          <div class="stat-box"><div class="num">2</div><div class="label">CERTS</div></div>
+          <div class="stat-box"><div class="num">90.6%</div><div class="label">BEST MODEL</div></div>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="eyebrow">Previously at</div>
+        <div class="prev-row"><span class="company">Malaysia Aviation Group</span><span class="year">2024</span></div>
+        <div class="prev-sub">IT Intern</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="block alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Selected work</div>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="featured-project">
+      <span class="tag">Machine learning</span>
+      <h3>Transparent conductive oxide classification</h3>
+      <p>End-to-end ML pipeline classifying 5 materials (AZO, FTO, ITO, MZO, ZnO) from X-ray diffraction scans using ~359 engineered features across 6 groups. Applied physics-motivated data augmentation to grow the dataset to 640 samples, then benchmarked 15 classifiers with leakage-free repeated stratified cross-validation. Best model: LightGBM, 90.6% holdout accuracy (Cohen's κ = 0.88).</p>
+      <div class="tech-row">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">LightGBM</span>
+        <span class="tech-pill">XGBoost</span>
+        <span class="tech-pill">Scikit-learn</span>
+      </div>
+    </div>
+
+    <div class="featured-project">
+      <span class="tag">Personal project</span>
+      <h3>DeltaTrain — sim racing telemetry and AI coaching</h3>
+      <p>Full end-to-end telemetry system for Automobilista 2: captures live UDP telemetry (speed, RPM, throttle, brake, steering, lap position) straight from the sim, records every session to a local database with automatic lap tracking, and drives a live dashboard with real-time gauges and rolling charts. Built automatic corner detection that segments each lap and measures brake points, apex speed, and throttle application corner-by-corner, plus a "best lap possible" calculator that stitches together the fastest segment through every corner across all sessions. An AI coaching layer reads the data and reports exactly where time is being lost, and where technique is already solid. Reverse-engineered an undocumented UDP protocol and traced a subtle bug back to a 1.6-second telemetry dropout mid-lap, validating every fix against synthetic data with a known correct answer before trusting it on real laps.</p>
+      <div class="tech-row">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">UDP sockets</span>
+        <span class="tech-pill">SQLite</span>
+        <span class="tech-pill">WebSockets</span>
+        <span class="tech-pill">Chart.js</span>
+        <span class="tech-pill">JavaScript</span>
+      </div>
+      <div class="gallery">
+        <img src="deltatrain-setup.jpg" alt="DeltaTrain desk setup with live telemetry dashboard" loading="lazy">
+        <img src="deltatrain-session-viewer.png" alt="DeltaTrain session viewer showing lap times and speed chart" loading="lazy">
+        <img src="deltatrain-corner-analysis.png" alt="DeltaTrain corner-by-corner analysis table" loading="lazy">
+        <img src="deltatrain-telemetry-1.png" alt="DeltaTrain RPM, throttle, brake and steering charts" loading="lazy">
+        <img src="deltatrain-telemetry-2.png" alt="DeltaTrain RPM and throttle brake charts" loading="lazy">
+        <img src="deltatrain-ai-coach.png" alt="DeltaTrain AI coach corner-by-corner recommendations" loading="lazy">
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <span class="tag light">Web dev</span>
+        <h4>Clinic management system</h4>
+        <p>Full-scale healthcare platform managing patient journeys from registration to pharmacy — HTML, CSS, PHP, and a relational database in phpMyAdmin.</p>
+      </div>
+      <div class="project-card">
+        <span class="tag light">Decision support</span>
+        <h4>HR employment probability helper</h4>
+        <p>MATLAB tool using fuzzy logic to convert qualitative hiring criteria into quantitative probability scores.</p>
+      </div>
+      <div class="project-card">
+        <span class="tag light">Computer vision</span>
+        <h4>AI drowsiness detection system</h4>
+        <p>Real-time computer vision application in MATLAB for fatigue monitoring via image processing.</p>
+      </div>
+      <div class="project-card">
+        <span class="tag light">Machine learning</span>
+        <h4>F1 race outcome predictor</h4>
+        <p>Predictive modelling of Formula 1 race results using XGBoost, Random Forest, Pandas, and FastF1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--blue);">Expertise</div>
+      <h2>Skills and stack</h2>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Data and analytics</h4>
+        <div class="skill-list">Power BI<br>Microsoft Excel<br>SQL &nbsp;·&nbsp; Tableau<br>Python &nbsp;·&nbsp; Pandas &nbsp;·&nbsp; Matplotlib</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h4>Machine learning</h4>
+        <div class="skill-list">XGBoost &nbsp;·&nbsp; LightGBM<br>Random Forest<br>Scikit-learn<br>Feature engineering</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💻</div>
+        <h4>Web and database</h4>
+        <div class="skill-list">HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; PHP<br>RDBMS<br>PhpMyAdmin</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <h4>Tools and platforms</h4>
+        <div class="skill-list">MATLAB<br>Power Automate<br>Java<br>SQLite &nbsp;·&nbsp; WebSockets<br>Microsoft Office Suite</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:20px; margin-bottom:16px;">Work experience</h2>
+    <div class="exp-card">
+      <div class="exp-date">07/2024 – 09/2024</div>
+      <div>
+        <div class="exp-title">IT Intern</div>
+        <div class="exp-company">Malaysia Aviation Group</div>
+        <div class="exp-desc">Developed an internal workflow system using Microsoft Forms, Outlook database, and Power Automate. Assisted with data analysis and visualisation in Power BI. Used Excel for data management and automation of operational records. Conducted system testing, supported Java-based application configuration, and contributed to digitalisation initiatives including vehicle usage forms and profile change tracking.</div>
+      </div>
+      <div class="exp-loc">Malaysia</div>
+    </div>
+
+    <h2 style="font-size:20px; margin:32px 0 16px;">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h4>Bachelor of Computer Science (Artificial Intelligence) with Honours</h4>
+        <div class="school">Universiti Teknikal Malaysia Melaka</div>
+        <div class="dates">03/2025 – Present &nbsp;·&nbsp; Melaka, Malaysia</div>
+      </div>
+      <div class="edu-card">
+        <h4>Diploma in Computer Science</h4>
+        <div class="school">Universiti Teknikal Malaysia Melaka</div>
+        <div class="dates">08/2022 – 02/2025 &nbsp;·&nbsp; Melaka, Malaysia</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:20px; margin:32px 0 16px;">Certifications</h2>
+    <div class="edu-grid">
+      <div class="cert-card">
+        <h4>Google Data Analytics Professional Certificate</h4>
+        <div class="sub">Google / Coursera · Jun 2026 · 9 courses covering spreadsheets, SQL, Tableau and Python</div>
+      </div>
+      <div class="cert-card">
+        <h4>CompTIA Data+</h4>
+        <div class="sub">Internationally recognised data analytics certification</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="block alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--blue);">About</div>
+      <h2>Who I am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="fariz-photo.jpg" alt="Fariz Danish" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0) 55%);"></div>
+        <div class="caption">
+          <div class="name">Fariz Danish</div>
+          <div class="loc">Sepang, Selangor</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>I'm a Computer Science (AI) student at Universiti Teknikal Malaysia Melaka, currently finishing my bachelor's after completing my diploma with a strong foundation in system development and data.</p>
+        <p>My work spans machine learning, data analytics, and web development — from building a leakage-free classification pipeline for materials-science data, to a full clinic management platform, to internal automation tools during my internship at Malaysia Aviation Group.</p>
+        <p>I hold the Google Data Analytics Professional Certificate and CompTIA Data+, and I'm looking for data, IT, or analytics-related roles where I can keep building things that make workflows more efficient.</p>
+        <div class="about-stats">
+          <div class="about-stat"><div class="num">6</div><div class="label">PROJECTS</div></div>
+          <div class="about-stat"><div class="num">2</div><div class="label">CERTIFICATIONS</div></div>
+          <div class="about-stat"><div class="num">90.6%</div><div class="label">MODEL ACCURACY</div></div>
+          <div class="about-stat"><div class="num">3</div><div class="label">MONTHS INTERNING</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--blue);">Contact</div>
+      <h2>Let's work together</h2>
+      <p class="section-sub">Open to internships and entry-level roles in data, IT, or analytics. Reach out if you'd like to connect.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <a href="mailto:fdanish26@gmail.com" class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <div><div class="cl">Email</div><div class="cv">fdanish26@gmail.com</div></div>
+        </a>
+        <a href="tel:+601155839953" class="contact-card">
+          <div class="contact-icon">📞</div>
+          <div><div class="cl">Phone</div><div class="cv">+60 11-5583 9953</div></div>
+        </a>
+        <a href="https://linkedin.com/in/fariz-danish-6b40992a9" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">🔗</div>
+          <div><div class="cl">LinkedIn</div><div class="cv">fariz-danish-6b40992a9</div></div>
+        </a>
+        <div class="avail-card">
+          <div class="title">● Open to opportunities</div>
+          <div class="desc">Available for internships and grad roles from 2026.</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:16px;">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me about the role or opportunity..."></textarea>
+          </div>
+          <div class="form-foot">
+            <span class="form-note">I respond within 24 hours.</span>
+            <button type="submit" class="btn btn-primary">Send message →</button>
+          </div>
+          <div id="formStatus"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Fariz Danish Bin Fadli · Computer Science (AI) Student</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('[data-nav]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Gallery lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+  // Contact form — submits to Formspree (see README for setup), falls back to mailto if not configured
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const form = e.target;
+    const status = document.getElementById('formStatus');
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if(form.action.includes('YOUR_FORM_ID')){
+      // Formspree not set up yet — fall back to opening the email client
+      const subject = encodeURIComponent('Portfolio contact from ' + name);
+      const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+      window.location.href = `mailto:fdanish26@gmail.com?subject=${subject}&body=${body}`;
+      status.textContent = 'Opening your email client (set up Formspree for in-page submission — see README).';
+      return;
+    }
+
+    status.textContent = 'Sending...';
+    try{
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if(res.ok){
+        status.textContent = 'Message sent — thanks for reaching out!';
+        form.reset();
+      } else {
+        status.textContent = 'Something went wrong. Please email fdanish26@gmail.com directly.';
+      }
+    } catch(err){
+      status.textContent = 'Something went wrong. Please email fdanish26@gmail.com directly.';
+    }
+  });
+</script>
+
+</body>
+</html>
