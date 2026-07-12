@@ -118,39 +118,84 @@
   section.block.alt{background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
 
   /* PROJECTS */
-  .featured-project{
-    background:var(--navy); border-radius:var(--radius); padding:32px; margin-bottom:16px;
-    display:flex; flex-direction:column; gap:12px;
-  }
   .tag{
     display:inline-block; font-size:11.5px; font-weight:500; padding:5px 12px; border-radius:14px;
     background:rgba(255,255,255,0.1); color:#9CB4FF; width:fit-content;
   }
   .tag.light{background:var(--blue-light); color:var(--blue);}
-  .featured-project h3{color:#fff; font-size:21px; font-weight:600; margin-top:4px;}
-  .featured-project p{color:#B4BBC7; font-size:14px; max-width:600px; line-height:1.7;}
   .tech-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;}
   .tech-pill{font-size:11.5px; color:#B4BBC7; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'JetBrains Mono',monospace;}
-  .featured-link{color:#9CB4FF; font-size:13.5px; font-weight:500; margin-top:6px; display:inline-flex; align-items:center; gap:4px;}
+  .featured-link{color:#9CB4FF; font-size:13.5px; font-weight:500; margin-top:14px; display:inline-flex; align-items:center; gap:4px;}
 
-  .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:6px;}
-  .gallery img{
-    width:100%; height:100px; object-fit:cover; border-radius:8px; cursor:pointer;
-    border:1px solid rgba(255,255,255,0.1); transition:opacity .15s;
-  }
-  .gallery img:hover{opacity:0.82;}
   .lightbox{
-    display:none; position:fixed; inset:0; background:rgba(10,13,20,0.9); z-index:1000;
+    display:none; position:fixed; inset:0; background:rgba(10,13,20,0.94); z-index:1300;
     align-items:center; justify-content:center; padding:32px; cursor:zoom-out;
   }
   .lightbox.open{display:flex;}
   .lightbox img{max-width:90vw; max-height:88vh; border-radius:10px; object-fit:contain;}
 
-  .project-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
-  .project-card{background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; transition:transform .15s, box-shadow .15s;}
-  .project-card:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(16,24,40,0.06);}
-  .project-card h4{font-size:14px; font-weight:600; margin:10px 0 6px;}
-  .project-card p{font-size:12.5px; color:var(--text-muted);}
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .proj-card{
+    background:#fff; border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; cursor:pointer; transition:transform .15s, box-shadow .15s;
+    display:flex; flex-direction:column;
+  }
+  .proj-card:hover{transform:translateY(-3px); box-shadow:0 14px 28px rgba(16,24,40,0.10);}
+  .proj-card .cover{position:relative; width:100%; aspect-ratio:16/10; background:var(--navy); overflow:hidden;}
+  .proj-card .cover img{width:100%; height:100%; object-fit:cover; transition:transform .3s;}
+  .proj-card:hover .cover img{transform:scale(1.06);}
+  .proj-card .cover.empty{
+    display:flex; align-items:center; justify-content:center; font-size:34px;
+    background:linear-gradient(135deg,#1c2b52,#2451E0);
+  }
+  .proj-card .count-badge{
+    position:absolute; bottom:8px; right:8px; background:rgba(10,13,20,0.65); color:#fff;
+    font-size:10.5px; font-weight:500; padding:3px 8px; border-radius:10px;
+  }
+  .proj-card .body{padding:16px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .proj-card .chip{background:var(--blue-light); color:var(--blue); font-size:10.5px; font-weight:500; padding:4px 10px; border-radius:12px; width:fit-content;}
+  .proj-card h3{font-size:15px; font-weight:600; line-height:1.35;}
+  .proj-card .blurb{font-size:12.5px; color:var(--text-muted); line-height:1.55; flex:1;}
+  .proj-card .mini-tech{font-size:11px; color:var(--text-muted); font-family:'JetBrains Mono',monospace;}
+
+  /* PROJECT MODAL */
+  .proj-modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(10,13,20,0.78); z-index:1200;
+    align-items:center; justify-content:center; padding:24px;
+  }
+  .proj-modal-overlay.open{display:flex;}
+  .proj-modal{
+    background:var(--navy); border-radius:var(--radius); max-width:720px; width:100%;
+    max-height:88vh; overflow-y:auto; position:relative; animation:modalIn .18s ease;
+  }
+  @keyframes modalIn{from{opacity:0; transform:translateY(8px) scale(.98);} to{opacity:1; transform:none;}}
+  .proj-modal-close{
+    position:absolute; top:12px; right:12px; z-index:2; background:rgba(0,0,0,0.4); color:#fff;
+    border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:15px;
+    display:flex; align-items:center; justify-content:center; transition:background .15s;
+  }
+  .proj-modal-close:hover{background:rgba(0,0,0,0.6);}
+  .proj-carousel{position:relative; background:#05070c;}
+  .proj-carousel img{width:100%; height:340px; object-fit:contain; display:block; cursor:zoom-in;}
+  .proj-carousel .carousel-placeholder{
+    height:200px; display:flex; align-items:center; justify-content:center; font-size:40px; color:#fff;
+    background:linear-gradient(135deg,#1c2b52,#2451E0);
+  }
+  .proj-carousel .nav-btn{
+    position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.14); color:#fff;
+    border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:18px;
+    display:flex; align-items:center; justify-content:center; transition:background .15s;
+  }
+  .proj-carousel .nav-btn:hover{background:rgba(255,255,255,0.26);}
+  .proj-carousel .nav-btn.prev{left:12px;}
+  .proj-carousel .nav-btn.next{right:12px;}
+  .proj-carousel .counter{
+    position:absolute; bottom:10px; right:14px; background:rgba(0,0,0,0.55); color:#fff;
+    font-size:11px; padding:3px 9px; border-radius:10px;
+  }
+  .proj-modal-body{padding:28px;}
+  .proj-modal-body h3{color:#fff; font-size:21px; font-weight:600; margin-top:10px;}
+  .proj-modal-body p{color:#B4BBC7; font-size:14px; line-height:1.7; margin-top:10px;}
 
   /* SKILLS */
   .skill-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:44px;}
@@ -230,13 +275,17 @@
     .menu-toggle{display:block;}
     .hero-grid{grid-template-columns:1fr;}
     h1{font-size:32px;}
-    .project-grid{grid-template-columns:repeat(2,1fr);}
+    .proj-grid{grid-template-columns:repeat(2,1fr);}
     .skill-grid{grid-template-columns:repeat(2,1fr);}
     .exp-card{grid-template-columns:1fr; gap:6px;}
     .edu-grid, .about-stats, .form-row{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr;}
     .about-photo{max-width:220px;}
     .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .proj-grid{grid-template-columns:1fr;}
+    .proj-carousel img{height:240px;}
   }
 </style>
 </head>
@@ -304,128 +353,10 @@
     <div class="section-head">
       <div class="eyebrow">Selected work</div>
       <h2>Projects</h2>
+      <p class="section-sub">Six projects across machine learning, computer vision, and full-stack development. Click a card for the full write-up and screenshots.</p>
     </div>
 
-    <div class="featured-project">
-      <span class="tag">Machine learning</span>
-      <h3>Transparent conductive oxide classification</h3>
-      <p>End-to-end ML pipeline classifying 5 materials (AZO, FTO, ITO, MZO, ZnO) from X-ray diffraction scans using ~359 engineered features across 6 groups. Applied physics-motivated data augmentation to grow the dataset to 640 samples, then benchmarked 15 classifiers with leakage-free repeated stratified cross-validation. Best model: LightGBM, 90.6% holdout accuracy (Cohen's κ = 0.88).</p>
-      <div class="tech-row">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">LightGBM</span>
-        <span class="tech-pill">XGBoost</span>
-        <span class="tech-pill">Scikit-learn</span>
-      </div>
-    </div>
-
-    <div class="featured-project">
-      <span class="tag">Personal project</span>
-      <h3>DeltaTrain — sim racing telemetry and AI coaching</h3>
-      <p>Full end-to-end telemetry system for Automobilista 2: captures live UDP telemetry (speed, RPM, throttle, brake, steering, lap position) straight from the sim, records every session to a local database with automatic lap tracking, and drives a live dashboard with real-time gauges and rolling charts. Built automatic corner detection that segments each lap and measures brake points, apex speed, and throttle application corner-by-corner, plus a "best lap possible" calculator that stitches together the fastest segment through every corner across all sessions. An AI coaching layer reads the data and reports exactly where time is being lost, and where technique is already solid. Reverse-engineered an undocumented UDP protocol and traced a subtle bug back to a 1.6-second telemetry dropout mid-lap, validating every fix against synthetic data with a known correct answer before trusting it on real laps.</p>
-      <div class="tech-row">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">UDP sockets</span>
-        <span class="tech-pill">SQLite</span>
-        <span class="tech-pill">WebSockets</span>
-        <span class="tech-pill">Chart.js</span>
-        <span class="tech-pill">JavaScript</span>
-      </div>
-      <div class="gallery">
-        <img src="deltatrain-setup.jpg" alt="DeltaTrain desk setup with live telemetry dashboard" loading="lazy">
-        <img src="deltatrain-session-viewer.png" alt="DeltaTrain session viewer showing lap times and speed chart" loading="lazy">
-        <img src="deltatrain-corner-analysis.png" alt="DeltaTrain corner-by-corner analysis table" loading="lazy">
-        <img src="deltatrain-telemetry-1.png" alt="DeltaTrain RPM, throttle, brake and steering charts" loading="lazy">
-        <img src="deltatrain-telemetry-2.png" alt="DeltaTrain RPM and throttle brake charts" loading="lazy">
-        <img src="deltatrain-ai-coach.png" alt="DeltaTrain AI coach corner-by-corner recommendations" loading="lazy">
-      </div>
-    </div>
-
-    <div class="featured-project">
-      <span class="tag light">Web dev</span>
-      <h3>MedTrack — clinic management system</h3>
-      <p>Full-scale clinic management platform covering the entire patient journey from registration to pharmacy: patient registration and queueing, doctor prescription workflows, a product catalog with category filters, inventory management with stock levels and expiry alerts, panel insurance claims across 12+ providers with file uploads and status tracking, and a transaction report with receipt generation. Built with HTML, CSS, and PHP, backed by a relational database designed in phpMyAdmin to keep patient records, prescriptions, and inventory in sync across every module.</p>
-      <div class="tech-row">
-        <span class="tech-pill">HTML</span>
-        <span class="tech-pill">CSS</span>
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">phpMyAdmin</span>
-        <span class="tech-pill">RDBMS</span>
-      </div>
-      <div class="gallery">
-        <img src="medtrack-5.png" alt="MedTrack patient registration list" loading="lazy">
-        <img src="medtrack-1.png" alt="MedTrack pending prescriptions for medicine" loading="lazy">
-        <img src="medtrack-2.png" alt="MedTrack prescription details and product selection" loading="lazy">
-        <img src="medtrack-8.png" alt="MedTrack doctor waiting for appointment prescriptions" loading="lazy">
-        <img src="medtrack-6.png" alt="MedTrack product list" loading="lazy">
-        <img src="medtrack-9.png" alt="MedTrack inventory management stock levels" loading="lazy">
-        <img src="medtrack-10.png" alt="MedTrack edit stock item modal" loading="lazy">
-        <img src="medtrack-3.png" alt="MedTrack panel claims portal with insurance providers" loading="lazy">
-        <img src="medtrack-4.png" alt="MedTrack claims history table" loading="lazy">
-        <img src="medtrack-7.png" alt="MedTrack stock and panel claim alerts dashboard" loading="lazy">
-        <img src="medtrack-11.png" alt="MedTrack transaction report with receipt generation" loading="lazy">
-      </div>
-    </div>
-
-    <div class="featured-project">
-      <span class="tag">Group project</span>
-      <h3>F1 Smart Companion — AI race prediction app</h3>
-      <p>AI-based mobile app built with a team of four for a university AI workshop, delivering race predictions, news, and driver insight in one place for F1 fans. A prediction engine trained on historical FastF1 data benchmarked XGBoost against Random Forest, a neural network, and logistic regression — XGBoost led with 95.8% average accuracy, powering a live countdown to the next Grand Prix, a projected podium, and full-grid win probabilities. Also includes "F1 Insider," an AI chatbot that summarises RSS news headlines and answers driver-specific questions, "Identify Driver AI" for photo-based driver recognition and stats lookup, and a community "Fan Pulse" driver rating system.</p>
-      <div class="tech-row">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">XGBoost</span>
-        <span class="tech-pill">Random Forest</span>
-        <span class="tech-pill">Pandas</span>
-        <span class="tech-pill">FastF1</span>
-      </div>
-      <div class="gallery">
-        <img src="F1pred-1.png" alt="F1 Smart Companion live countdown to the next Grand Prix" loading="lazy">
-        <img src="F1pred-2.png" alt="F1 Smart Companion AI forecast projected podium and win probabilities" loading="lazy">
-        <img src="F1pred-5.png" alt="F1 Smart Companion driver directory with team filters" loading="lazy">
-        <img src="F1pred-6.png" alt="F1 Smart Companion Identify Driver AI photo lookup showing driver stats" loading="lazy">
-        <img src="F1pred-4.png" alt="F1 Smart Companion AI-curated trending F1 news headlines" loading="lazy">
-        <img src="F1pred-7.png" alt="F1 Insider chatbot summarising the latest F1 news" loading="lazy">
-        <img src="F1pred-8.png" alt="F1 Insider chatbot answering a driver-specific news query" loading="lazy">
-        <img src="F1pred-3.png" alt="F1 Smart Companion Fan Pulse community driver ratings" loading="lazy">
-        <img src="F1pred-poster.png" alt="F1 Smart Companion research poster summarising objectives, methodology, and results" loading="lazy">
-      </div>
-    </div>
-
-    <div class="featured-project">
-      <span class="tag light">Computer vision</span>
-      <h3>AI drowsiness detection system</h3>
-      <p>Real-time computer vision application in MATLAB for fatigue monitoring via webcam. Detects the face and eye region each frame, tracks eye closure ("darkness ratio") and blink rate over a rolling window, and raises a live "DROWSINESS ALERT" overlay when eyes stay closed past a threshold or blink rate drops below 5/min for 30 seconds.</p>
-      <div class="tech-row">
-        <span class="tech-pill">MATLAB</span>
-        <span class="tech-pill">Computer vision</span>
-        <span class="tech-pill">Image processing</span>
-      </div>
-      <div class="gallery">
-        <img src="AI_Drowsiness-flowchart.png" alt="AI drowsiness detection system logic flowchart" loading="lazy">
-        <img src="AI_Drowsiness-output2.jpg" alt="AI drowsiness detection tracking face and eyes with live blink rate" loading="lazy">
-        <img src="AI_Drowsiness-output1.jpg" alt="AI drowsiness detection triggering a drowsiness alert" loading="lazy">
-      </div>
-      <a href="https://www.youtube.com/watch?v=v1Fvc5lOq28" target="_blank" rel="noopener" class="featured-link">Watch demo video →</a>
-    </div>
-
-    <div class="featured-project">
-      <span class="tag light">Decision support</span>
-      <h3>Hiring potential estimator — fuzzy logic decision support</h3>
-      <p>Group project building a hybrid Fuzzy C-Means (FCM) and Fuzzy Inference System (FIS) model that estimates a job candidate's hiring potential, wrapped in a MATLAB App Designer GUI. Unlabelled candidate data (age, experience, interview score, skill score, education level) is clustered per-feature with FCM to generate fuzzy membership functions, then a Mamdani FIS with 15 expert-defined rules across 5 inputs scores each candidate 0–10 and classifies them Low, Medium, or High. The app supports both individual evaluation and batch upload, with results colour-coded and the top 3 candidates highlighted automatically.</p>
-      <div class="tech-row">
-        <span class="tech-pill">MATLAB</span>
-        <span class="tech-pill">Fuzzy logic</span>
-        <span class="tech-pill">FCM clustering</span>
-        <span class="tech-pill">Mamdani FIS</span>
-        <span class="tech-pill">App Designer</span>
-      </div>
-      <div class="gallery">
-        <img src="HR_emp-2.png" alt="Hiring potential estimator objectives and system workflow" loading="lazy">
-        <img src="HR_emp-3.png" alt="Hiring potential estimator original and processed candidate dataset" loading="lazy">
-        <img src="HR_emp-4.png" alt="Hiring potential estimator Mamdani fuzzy inference system structure" loading="lazy">
-        <img src="HR_emp-1.png" alt="Hiring potential estimator MATLAB app individual and batch evaluation tabs" loading="lazy">
-        <img src="HR_emp-5.png" alt="Hiring potential estimator individual evaluation interface with hiring potential score" loading="lazy">
-      </div>
-    </div>
+    <div class="proj-grid" id="projGrid"></div>
   </div>
 </section>
 
@@ -594,6 +525,26 @@
   <img src="" alt="" id="lightboxImg">
 </div>
 
+<div class="proj-modal-overlay" id="projModalOverlay">
+  <div class="proj-modal">
+    <button class="proj-modal-close" id="projModalClose" aria-label="Close">✕</button>
+    <div class="proj-carousel" id="projCarousel">
+      <div class="carousel-placeholder" id="projPlaceholder">🧪</div>
+      <img id="projCarouselImg" src="" alt="">
+      <button class="nav-btn prev" id="projPrev" aria-label="Previous image">‹</button>
+      <button class="nav-btn next" id="projNext" aria-label="Next image">›</button>
+      <span class="counter" id="projCounter"></span>
+    </div>
+    <div class="proj-modal-body">
+      <span class="tag" id="projTag"></span>
+      <h3 id="projTitle"></h3>
+      <p id="projDesc"></p>
+      <div class="tech-row" id="projTech"></div>
+      <a href="#" id="projLink" target="_blank" rel="noopener" class="featured-link" style="display:none;"></a>
+    </div>
+  </div>
+</div>
+
 <script>
   // Mobile menu toggle
   const menuToggle = document.getElementById('menuToggle');
@@ -615,17 +566,233 @@
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => observer.observe(s));
 
-  // Gallery lightbox
+  // Full-size image zoom (opened from the project modal carousel)
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add('open');
-    });
-  });
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+  // Project data
+  const projects = [
+    {
+      id:'tco', tag:'Final Year Project (Bachelor Degree)', tagLight:false,
+      title:'Transparent conductive oxide classification',
+      blurb:'90.6% accuracy classifying 5 materials from X-ray diffraction scans with LightGBM, benchmarked against 14 other models.',
+      description:'End-to-end ML pipeline classifying 5 materials (AZO, FTO, ITO, MZO, ZnO) from X-ray diffraction scans using ~359 engineered features across 6 groups. Applied physics-motivated data augmentation to grow the dataset to 640 samples, then benchmarked 15 classifiers with leakage-free repeated stratified cross-validation. Best model: LightGBM, 90.6% holdout accuracy (Cohen’s κ = 0.88).',
+      tech:['Python','LightGBM','XGBoost','Scikit-learn'],
+      images:[
+        {src:'FYP-1.jpeg', alt:''},
+        {src:'FYP-2.jpeg', alt:''},
+        {src:'FYP-3.jpeg', alt:''},
+        {src:'FYP-4.jpeg', alt:''},
+        {src:'FYP-5.jpeg', alt:''},
+        {src:'FYP-6.jpeg', alt:''},
+        {src:'FYP-7.jpeg', alt:''},
+        {src:'FYP-8.jpeg', alt:''},
+      ]
+    },
+    {
+      id:'deltatrain', tag:'Personal project', tagLight:false,
+      title:'DeltaTrain — sim racing telemetry and AI coaching',
+      blurb:'Live sim-racing telemetry with automatic corner analysis and an AI coach that pinpoints exactly where time is lost.',
+      description:'Full end-to-end telemetry system for Automobilista 2: captures live UDP telemetry (speed, RPM, throttle, brake, steering, lap position) straight from the sim, records every session to a local database with automatic lap tracking, and drives a live dashboard with real-time gauges and rolling charts. Built automatic corner detection that segments each lap and measures brake points, apex speed, and throttle application corner-by-corner, plus a "best lap possible" calculator that stitches together the fastest segment through every corner across all sessions. An AI coaching layer reads the data and reports exactly where time is being lost, and where technique is already solid. Reverse-engineered an undocumented UDP protocol and traced a subtle bug back to a 1.6-second telemetry dropout mid-lap, validating every fix against synthetic data with a known correct answer before trusting it on real laps.',
+      tech:['Python','UDP sockets','SQLite','WebSockets','Chart.js','JavaScript'],
+      images:[
+        {src:'deltatrain-setup.jpg', alt:'DeltaTrain desk setup with live telemetry dashboard'},
+        {src:'deltatrain-session-viewer.png', alt:'DeltaTrain session viewer showing lap times and speed chart'},
+        {src:'deltatrain-corner-analysis.png', alt:'DeltaTrain corner-by-corner analysis table'},
+        {src:'deltatrain-telemetry-1.png', alt:'DeltaTrain RPM, throttle, brake and steering charts'},
+        {src:'deltatrain-telemetry-2.png', alt:'DeltaTrain RPM and throttle brake charts'},
+        {src:'deltatrain-ai-coach.png', alt:'DeltaTrain AI coach corner-by-corner recommendations'}
+      ]
+    },
+    {
+      id:'medtrack', tag:'Final Year Project (Diploma)', tagLight:true,
+      title:'MedTrack — clinic management system',
+      blurb:'Full clinic platform covering registration, prescriptions, inventory, insurance claims, and billing.',
+      description:'Full-scale clinic management platform covering the entire patient journey from registration to pharmacy: patient registration and queueing, doctor prescription workflows, a product catalog with category filters, inventory management with stock levels and expiry alerts, panel insurance claims across 12+ providers with file uploads and status tracking, and a transaction report with receipt generation. Built with HTML, CSS, and PHP, backed by a relational database designed in phpMyAdmin to keep patient records, prescriptions, and inventory in sync across every module.',
+      tech:['HTML','CSS','PHP','phpMyAdmin','RDBMS'],
+      images:[
+        {src:'medtrack-5.png', alt:'MedTrack patient registration list'},
+        {src:'medtrack-1.png', alt:'MedTrack pending prescriptions for medicine'},
+        {src:'medtrack-2.png', alt:'MedTrack prescription details and product selection'},
+        {src:'medtrack-8.png', alt:'MedTrack doctor waiting for appointment prescriptions'},
+        {src:'medtrack-6.png', alt:'MedTrack product list'},
+        {src:'medtrack-9.png', alt:'MedTrack inventory management stock levels'},
+        {src:'medtrack-10.png', alt:'MedTrack edit stock item modal'},
+        {src:'medtrack-3.png', alt:'MedTrack panel claims portal with insurance providers'},
+        {src:'medtrack-4.png', alt:'MedTrack claims history table'},
+        {src:'medtrack-7.png', alt:'MedTrack stock and panel claim alerts dashboard'},
+        {src:'medtrack-11.png', alt:'MedTrack transaction report with receipt generation'}
+      ]
+    },
+    {
+      id:'f1', tag:'Group project', tagLight:false,
+      title:'F1 Smart Companion — AI race prediction app',
+      blurb:'AI mobile app for race predictions, driver stats, and F1 news — 95.8% prediction accuracy with XGBoost.',
+      description:'AI-based mobile app built with a team of four for a university AI workshop, delivering race predictions, news, and driver insight in one place for F1 fans. A prediction engine trained on historical FastF1 data benchmarked XGBoost against Random Forest, a neural network, and logistic regression — XGBoost led with 95.8% average accuracy, powering a live countdown to the next Grand Prix, a projected podium, and full-grid win probabilities. Also includes "F1 Insider," an AI chatbot that summarises RSS news headlines and answers driver-specific questions, "Identify Driver AI" for photo-based driver recognition and stats lookup, and a community "Fan Pulse" driver rating system.',
+      tech:['Python','XGBoost','Random Forest','Pandas','FastF1'],
+      images:[
+        {src:'F1pred-1.png', alt:'F1 Smart Companion live countdown to the next Grand Prix'},
+        {src:'F1pred-2.png', alt:'F1 Smart Companion AI forecast projected podium and win probabilities'},
+        {src:'F1pred-5.png', alt:'F1 Smart Companion driver directory with team filters'},
+        {src:'F1pred-6.png', alt:'F1 Smart Companion Identify Driver AI photo lookup showing driver stats'},
+        {src:'F1pred-4.png', alt:'F1 Smart Companion AI-curated trending F1 news headlines'},
+        {src:'F1pred-7.png', alt:'F1 Insider chatbot summarising the latest F1 news'},
+        {src:'F1pred-8.png', alt:'F1 Insider chatbot answering a driver-specific news query'},
+        {src:'F1pred-3.png', alt:'F1 Smart Companion Fan Pulse community driver ratings'},
+        {src:'F1pred-poster.png', alt:'F1 Smart Companion research poster summarising objectives, methodology, and results'}
+      ],
+      link:{label:'Watch demo video', href:'https://youtu.be/QSdyePM0pE4?si=FQ_a6vqwEeeSsKmF'}
+    },
+    {
+      id:'drowsiness', tag:'Computer vision', tagLight:true,
+      title:'AI drowsiness detection system',
+      blurb:'Real-time webcam fatigue monitoring that tracks blink rate and eye closure to flag drowsiness.',
+      description:'Real-time computer vision application in MATLAB for fatigue monitoring via webcam. Detects the face and eye region each frame, tracks eye closure ("darkness ratio") and blink rate over a rolling window, and raises a live "DROWSINESS ALERT" overlay when eyes stay closed past a threshold or blink rate drops below 5/min for 30 seconds.',
+      tech:['MATLAB','Computer vision','Image processing'],
+      images:[
+        {src:'AI_Drowsiness-flowchart.png', alt:'AI drowsiness detection system logic flowchart'},
+        {src:'AI_Drowsiness-output2.jpg', alt:'AI drowsiness detection tracking face and eyes with live blink rate'},
+        {src:'AI_Drowsiness-output1.jpg', alt:'AI drowsiness detection triggering a drowsiness alert'}
+      ],
+      link:{label:'Watch demo video', href:'https://www.youtube.com/watch?v=v1Fvc5lOq28'}
+    },
+    {
+      id:'hr', tag:'Decision support', tagLight:true,
+      title:'Hiring potential estimator — fuzzy logic decision support',
+      blurb:'Fuzzy-logic MATLAB app that scores candidates’ hiring potential from interview and skill data.',
+      description:'Group project building a hybrid Fuzzy C-Means (FCM) and Fuzzy Inference System (FIS) model that estimates a job candidate’s hiring potential, wrapped in a MATLAB App Designer GUI. Unlabelled candidate data (age, experience, interview score, skill score, education level) is clustered per-feature with FCM to generate fuzzy membership functions, then a Mamdani FIS with 15 expert-defined rules across 5 inputs scores each candidate 0–10 and classifies them Low, Medium, or High. The app supports both individual evaluation and batch upload, with results colour-coded and the top 3 candidates highlighted automatically.',
+      tech:['MATLAB','Fuzzy logic','FCM clustering','Mamdani FIS','App Designer'],
+      images:[
+        {src:'HR_emp-2.png', alt:'Hiring potential estimator objectives and system workflow'},
+        {src:'HR_emp-3.png', alt:'Hiring potential estimator original and processed candidate dataset'},
+        {src:'HR_emp-4.png', alt:'Hiring potential estimator Mamdani fuzzy inference system structure'},
+        {src:'HR_emp-1.png', alt:'Hiring potential estimator MATLAB app individual and batch evaluation tabs'},
+        {src:'HR_emp-5.png', alt:'Hiring potential estimator individual evaluation interface with hiring potential score'}
+      ]
+    },
+    {
+      id:'vehicle', tag:'Data Analysis', tagLight:true,
+      title:'Vehicle Registration Transactions: Cars',
+      blurb:'Analyzed over 700,000 Malaysian vehicle registration records using machine learning to predict consumer trends and built an interactive Power BI dashboard to visualize regional market demand.',
+      description:'This project transformed over 700,000 raw Malaysian government vehicle registration records into actionable market insights for automotive stakeholders. After cleaning the dataset and extracting temporal features, multiple machine learning models were evaluated using 10-fold cross-validation, where a Random Forest model achieved a near-perfect $R^2$ of 0.98 in predicting trends. To make these insights accessible, an interactive Power BI dashboard was developed, featuring geospatial heat maps, monthly trend lines, and brand distributions to streamline data-driven decision-making. ',
+      tech:['MATLAB','Fuzzy logic','FCM clustering','Mamdani FIS','App Designer'],
+      images:[
+        {src:'VehReg-1.png', alt:'Vehicle registration transactions objectives and system workflow'},
+        {src:'VehReg-2.png', alt:'Vehicle registration transactions original and processed dataset'},
+        {src:'VehReg-3.png', alt:'Vehicle registration transactions Random Forest model performance'},
+        {src:'VehReg-4.png', alt:'Vehicle registration transactions Power BI dashboard interface'},
+        {src:'VehReg-5.png', alt:'Vehicle registration transactions regional market demand visualization'}
+      ]
+    }
+  ];
+
+  // Render project cards
+  const projGrid = document.getElementById('projGrid');
+  projects.forEach((p, idx) => {
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+    const cover = p.images.length
+      ? `<div class="cover"><img src="${p.images[0].src}" alt="${p.images[0].alt}" loading="lazy">${p.images.length > 1 ? `<span class="count-badge">🖼 ${p.images.length}</span>` : ''}</div>`
+      : `<div class="cover empty">🧪</div>`;
+    const techPreview = p.tech.slice(0, 3).join(' · ') + (p.tech.length > 3 ? ' · +' + (p.tech.length - 3) : '');
+    card.innerHTML = `
+      ${cover}
+      <div class="body">
+        <span class="chip">${p.tag}</span>
+        <h3>${p.title}</h3>
+        <p class="blurb">${p.blurb}</p>
+        <div class="mini-tech">${techPreview}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => openProjModal(idx));
+    projGrid.appendChild(card);
+  });
+
+  // Project modal
+  const projOverlay = document.getElementById('projModalOverlay');
+  const projCarousel = document.getElementById('projCarousel');
+  const projPlaceholder = document.getElementById('projPlaceholder');
+  const projCarouselImg = document.getElementById('projCarouselImg');
+  const projPrev = document.getElementById('projPrev');
+  const projNext = document.getElementById('projNext');
+  const projCounter = document.getElementById('projCounter');
+  const projTag = document.getElementById('projTag');
+  const projTitle = document.getElementById('projTitle');
+  const projDesc = document.getElementById('projDesc');
+  const projTech = document.getElementById('projTech');
+  const projLink = document.getElementById('projLink');
+
+  let currentProject = null;
+  let currentImgIndex = 0;
+
+  function renderCarousel(){
+    const hasImages = currentProject.images.length > 0;
+    projPlaceholder.style.display = hasImages ? 'none' : 'flex';
+    projCarouselImg.style.display = hasImages ? 'block' : 'none';
+    projCounter.style.display = hasImages ? 'block' : 'none';
+    if(!hasImages){
+      projPrev.style.display = 'none';
+      projNext.style.display = 'none';
+      return;
+    }
+    const img = currentProject.images[currentImgIndex];
+    projCarouselImg.src = img.src;
+    projCarouselImg.alt = img.alt;
+    projCounter.textContent = `${currentImgIndex + 1} / ${currentProject.images.length}`;
+    const multi = currentProject.images.length > 1;
+    projPrev.style.display = multi ? 'flex' : 'none';
+    projNext.style.display = multi ? 'flex' : 'none';
+  }
+
+  function openProjModal(idx){
+    currentProject = projects[idx];
+    currentImgIndex = 0;
+    projTag.textContent = currentProject.tag;
+    projTag.className = 'tag' + (currentProject.tagLight ? ' light' : '');
+    projTitle.textContent = currentProject.title;
+    projDesc.textContent = currentProject.description;
+    projTech.innerHTML = currentProject.tech.map(t => `<span class="tech-pill">${t}</span>`).join('');
+    if(currentProject.link){
+      projLink.href = currentProject.link.href;
+      projLink.textContent = currentProject.link.label + ' →';
+      projLink.style.display = 'inline-flex';
+    } else {
+      projLink.style.display = 'none';
+    }
+    renderCarousel();
+    projOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjModal(){
+    projOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('projModalClose').addEventListener('click', closeProjModal);
+  projOverlay.addEventListener('click', (e) => { if(e.target === projOverlay) closeProjModal(); });
+  projPrev.addEventListener('click', () => {
+    currentImgIndex = (currentImgIndex - 1 + currentProject.images.length) % currentProject.images.length;
+    renderCarousel();
+  });
+  projNext.addEventListener('click', () => {
+    currentImgIndex = (currentImgIndex + 1) % currentProject.images.length;
+    renderCarousel();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(!projOverlay.classList.contains('open')) return;
+    if(e.key === 'Escape') closeProjModal();
+    if(e.key === 'ArrowLeft' && currentProject.images.length > 1) projPrev.click();
+    if(e.key === 'ArrowRight' && currentProject.images.length > 1) projNext.click();
+  });
+
+  // Click the carousel image to open a full-size zoom
+  projCarouselImg.addEventListener('click', () => {
+    lightboxImg.src = projCarouselImg.src;
+    lightboxImg.alt = projCarouselImg.alt;
+    lightbox.classList.add('open');
+  });
 
   // Contact form — submits to Formspree (see README for setup), falls back to mailto if not configured
   document.getElementById('contactForm').addEventListener('submit', async function(e){
