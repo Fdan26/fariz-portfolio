@@ -407,11 +407,23 @@
       <a href="https://www.youtube.com/watch?v=v1Fvc5lOq28" target="_blank" rel="noopener" class="featured-link">Watch demo video →</a>
     </div>
 
-    <div class="project-grid">
-      <div class="project-card">
-        <span class="tag light">Decision support</span>
-        <h4>HR employment probability helper</h4>
-        <p>MATLAB tool using fuzzy logic to convert qualitative hiring criteria into quantitative probability scores.</p>
+    <div class="featured-project">
+      <span class="tag light">Decision support</span>
+      <h3>Hiring potential estimator — fuzzy logic decision support</h3>
+      <p>Group project building a hybrid Fuzzy C-Means (FCM) and Fuzzy Inference System (FIS) model that estimates a job candidate's hiring potential, wrapped in a MATLAB App Designer GUI. Unlabelled candidate data (age, experience, interview score, skill score, education level) is clustered per-feature with FCM to generate fuzzy membership functions, then a Mamdani FIS with 15 expert-defined rules across 5 inputs scores each candidate 0–10 and classifies them Low, Medium, or High. The app supports both individual evaluation and batch upload, with results colour-coded and the top 3 candidates highlighted automatically.</p>
+      <div class="tech-row">
+        <span class="tech-pill">MATLAB</span>
+        <span class="tech-pill">Fuzzy logic</span>
+        <span class="tech-pill">FCM clustering</span>
+        <span class="tech-pill">Mamdani FIS</span>
+        <span class="tech-pill">App Designer</span>
+      </div>
+      <div class="gallery">
+        <img src="HR_emp-2.png" alt="Hiring potential estimator objectives and system workflow" loading="lazy">
+        <img src="HR_emp-3.png" alt="Hiring potential estimator original and processed candidate dataset" loading="lazy">
+        <img src="HR_emp-4.png" alt="Hiring potential estimator Mamdani fuzzy inference system structure" loading="lazy">
+        <img src="HR_emp-1.png" alt="Hiring potential estimator MATLAB app individual and batch evaluation tabs" loading="lazy">
+        <img src="HR_emp-5.png" alt="Hiring potential estimator individual evaluation interface with hiring potential score" loading="lazy">
       </div>
     </div>
   </div>
